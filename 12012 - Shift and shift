@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main()
+{
+    int a,b,c,satu,dua;
+    scanf("%d",&a);
+    satu = a/100;
+    dua = a%100;
+    b = (dua*100) + satu;
+    c = a*b;
+    printf("%d\n",c);
+}
