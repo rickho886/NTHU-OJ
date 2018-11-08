@@ -1,0 +1,16 @@
+#include <stdio.h>
+int main()
+{
+    int input,hour,minute;
+    char *indicator = {"a.m."};
+    scanf("%d",&input);
+    hour = input / 100;
+    minute = input % 100;
+    if (hour >= 12) {
+        hour -= 12;
+        indicator = "p.m.";
+
+    }
+    printf("%02d:%02d %s",hour,minute,indicator);
+    return 0;
+}
