@@ -1,0 +1,44 @@
+#include<stdio.h>
+
+int main(void) {
+
+  unsigned int N;
+  int binary[11] = {0}; 
+
+  scanf("%u", &N);
+
+  if (N > 0) {
+    for (int i = 1; i <= N; i++) {
+      binary[10] += 1;
+
+    for (int a = 10; binary[a] > 1; a--) {
+      binary[a] = 0;
+      binary[a-1] += 1;
+    }
+  }
+
+  N += 1;
+  binary[10] += 1;
+  int count = 0;
+    for (int a = 10; binary[a] > 1; a--) {
+      binary[a] = 0;
+      binary[a-1] += 1;
+      count++;
+    }
+  int i = 0;
+  while (binary[i] == 0) {
+      i++;
+    }
+
+  for (; i < 11; i++) {
+      printf("%d", binary[i]);
+  }
+  printf(" %d", count);
+  }
+
+  else {
+    printf("0");
+  }
+
+return 0;
+}
