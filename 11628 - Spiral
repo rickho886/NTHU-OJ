@@ -38,3 +38,78 @@ int main()
         i++;
  	}
 }
+
+
+
+
+2nd version ( too complicated)
+
+#include <stdio.h>
+int main()
+{
+ 	int i,j,k,T, loop;
+ 	scanf("%d",&T);
+ 	int N[T];
+ 	for(i = 0; i < T; i++) {
+        scanf("%d",&N[i]);
+        int s1 = 0, e1 = N[i];
+        int s2 = N[i]-1, e2 = N[i];
+        int s3 = N[i]-1, e3 = 1;
+        int s4 = 1, e4 = 1;
+        int a = 0, a1 = -1;
+        int b = 0, b1 = 0;
+        int c = N[i]-1, c1 = N[i]-1;
+        int d = N[i]-1, d1 = N[i]-1;
+        char matrix[N[i]][N[i]];
+        for(j = 0; j < N[i]; j++) {
+            for(k = 0; k < N[i]; k++) {
+                matrix[j][k] = ' ';
+            }
+        }
+
+        for(loop = 0; loop < (N[i]/3)+1; loop++) {
+            while(a < e1) {
+                matrix[s1][a] = '#';
+                a++;
+            }
+            a1 += 2;
+            a = a1;
+            s1 += 2;
+            e1 -= 2;
+
+            while(b < e2) {
+                matrix[b][s2] = '#';
+                b++;
+            }
+            b1 += 2;
+            b = b1;
+            s2 -= 2;
+            e2 -= 2;
+
+            while(c >= e3) {
+                matrix[s3][c] = '#';
+                c--;
+            }
+            c1 -= 2;
+            c = c1;
+            s3 -= 2;
+            e3 += 2;
+
+            while(d > e4) {
+                matrix[d][s4] = '#';
+                d--;
+            }
+            d1 -= 2;
+            d = d1;
+            s4 += 2;
+            e4 += 2;
+        }
+
+        for(j = 0; j < N[i]; j++) {
+                for(k = 0; k < N[i]; k++) {
+                    printf("%c",matrix[j][k]);
+                }
+                printf("\n");
+            }
+ 	}
+}
