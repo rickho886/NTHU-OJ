@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+int main()
+{
+    int a,b,c,x,y,z;
+    int g,h,i;
+    scanf("%d %d %d",&a,&b,&c);
+    x = 2*c - 0.5*b;
+    y = a + c - b;
+    z = 1.5*b - a - 2*c;
+    printf("%d %d %d\n",x,y,z);
+    return 0;
+}
