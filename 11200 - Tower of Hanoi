@@ -1,0 +1,16 @@
+#include <stdio.h>
+void hanoi(int n)
+{
+	if(n > 0){
+		hanoi(n-1);
+		printf("%d\n",n);
+		hanoi(n-1);
+	}
+}
+int main()
+{
+	int T;
+	scanf("%d",&T);
+	hanoi(T);
+	return 0;
+}
