@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main()
+{
+    int N, n = 0, M = 0, remainder;
+    scanf("%d",&N);
+    n = N;
+    while (N != 0)
+    {
+        remainder = N%10;
+        M = M*10 + remainder;
+        N /= 10;
+    }
+    float result = n + M;
+    result /= 2;
+    printf("%3.1f",result);
+    return 0;
+}
+
+
