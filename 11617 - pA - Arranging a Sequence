@@ -1,0 +1,29 @@
+#include <stdio.h>
+int output[300000];
+int e[300000];
+int front[300000] = {0};
+int main()
+{
+    int i, n, m, num = 0;
+    scanf("%d%d",&n,&m);
+    for(i = 1; i <= m; i++) {
+        scanf("%d",&e[i]);
+    }
+    for(i = m; i > 0; i--) {
+        if(front[e[i]] == 0) {
+            front[e[i]]++;
+            output[num] = e[i];
+            num++;
+        }
+    }
+
+    for(i = 1; i <= n; i++) {
+        if(front[i] == 0) {
+            output[num] = i;
+            num++;
+        }
+    }
+
+    for(i = 0; i < n; i++) printf("%d\n",output[i]);
+
+}
