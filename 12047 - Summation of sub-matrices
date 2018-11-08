@@ -1,0 +1,27 @@
+#include <stdio.h>
+int sum[3000][3000] = {0};
+int sum1[600000] = {0};
+int matrix[3000][3000] = {0};
+int main()
+{
+    int a, i, j;
+    int x1,y1,x2,y2;
+    int N, M, Q;
+    scanf("%d%d",&N,&M);
+    for(i = 1; i <= N; i++) {
+        for(j = 1; j <= M; j++) {
+            scanf("%d",&matrix[i][j]);
+            sum[i][j] = sum[i-1][j] + sum[i][j-1] - sum[i-1][j-1]+ matrix[i][j];
+        }
+    }
+    scanf("%d",&Q);
+    for(a = 0; a < Q ;a++) {
+        scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
+		sum1[a] = 0;
+        sum1[a] = sum[x2][y2] - sum[x2][y1-1] - sum[x1-1][y2] + sum[x1-1][y1-1];
+    }
+
+    for(a = 0; a < Q; a++) {
+        printf("%d\n",sum1[a]);
+    }
+}
