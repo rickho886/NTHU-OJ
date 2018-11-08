@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    double formula;
+    int a,b,c,x,y,x1,y1,x2,y2;
+    scanf("(%d,%d) (%d,%d) (%d,%d)",&x1,&y1,&x2,&y2,&x,&y);
+    if(x < -10000 || x1 < -10000 || x2 < -10000 || y < -10000 || y1 < -10000 || y2 < -10000 || x > 10000 || x1 > 10000 || x2 > 10000 || y > 10000 || y1 > 10000 || y2 > 10000) {
+        return 0;
+    }
+    a = y2 - y1;
+    b = x1 - x2;
+    c = (x2*y1) - (x1*y2);
+    formula = ((a*x) + (b*y) + c) / (sqrt((a*a) + (b*b)));
+    printf("%.2f\n",formula*formula);
+}
