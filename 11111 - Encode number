@@ -1,0 +1,16 @@
+#include <stdio.h>
+int main()
+{
+    int N,satu,dua,tiga;
+    char string[10] = {'A','B','C','D','E','F','G','H','I'};
+    char h1,h2,h3;
+    scanf("%d",&N);
+    satu = (N/100)- 1;
+    dua = ((N / 10)% 10) - 1;
+    tiga = (N%10) - 1;
+    h1 = string[satu];
+    h2 = string[dua];
+    h3 = string[tiga];
+    printf("%c%c%c",h1,h2,h3);
+    return 0;
+}
