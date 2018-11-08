@@ -1,0 +1,13 @@
+#include <stdio.h>
+int main()
+{
+    int N,X,Y,Z,a,b;
+    scanf("%d %d %d %d", &N, &X, &Y, &Z);
+    if(((0 < N) && (N < 1000)) && ((0 < X && X < 1000)) && ((0 < Y) && (Y < 1000)) && ((0 < Z) && (Z < 1000)) ) {
+        a = X + Y + Z - N;
+        b = X - a;
+        printf("%d %d",a,b);
+    } else {
+        return 0;
+    }
+}
