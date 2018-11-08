@@ -1,0 +1,22 @@
+#include <stdio.h>
+int main()
+{
+    char a[3];
+    int N,i;
+    scanf("%s %d",&a,&N);
+    if(N > 0 || N < -2147483648 ) {
+		return 0;
+	}
+	N = N*(-1);
+    for(i = 0; i < 3; i++) {
+        a[i] = a[i] + (N%26);
+        while(a[i] < 65) {
+            a[i] += 26;
+        }
+        while(a[i] > 90) {
+            a[i] -= 26;
+        }
+    }
+    printf("%s\n",a);
+
+}
