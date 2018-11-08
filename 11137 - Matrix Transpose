@@ -1,0 +1,30 @@
+#include <stdio.h>
+int main()
+{
+    int N, M, O;
+    int i, j, l = 0;
+    int matrix[30][30] = {0};
+    int matrix_T[30][30];
+    scanf("%d%d",&N,&M);
+    O = M;
+    for(i = 0; i < N; i++) {
+        for(j = 0; j < M; j++) {
+            scanf("%d",&matrix[i][j]);
+        }
+    }
+    for(i = 0; i < M; i++) {
+        for(j = 0; j < N; j++) {
+            matrix_T[i][j] = matrix[j][i];
+        }
+    }
+
+    for(i = 0; i < M; i++) {
+        for(j = 0; j < N; j++) {
+            printf("%d",matrix_T[i][j]);
+            if(j < N-1) {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+}
