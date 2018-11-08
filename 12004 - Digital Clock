@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int t,hour = 0, minute = 0, second = 0;
+    scanf("%d",&t);
+    hour = t / 3600;
+    minute = (t - (hour*3600)) / 60;
+    second = t - (hour*3600 + minute*60);
+    printf("%02d:%02d:%02d\n",hour,minute,second);
+    return 0;
+}
