@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <limits.h>
+int main()
+{
+    int a, b, i, j, k, l, N, M, distance;
+    int grid[100][100];
+    int min = INT_MAX;
+    scanf("%d%d",&N,&M);
+    for(i = 0; i < N; i++) {
+        for(j = 0; j < M; j++) {
+            scanf("%d",&grid[i][j]);
+        }
+    }
+
+    for(i = 0; i < N; i++) {
+        for(j = 0; j < M; j++) {
+            distance = 0;
+            for(k = 0; k < N; k++) {
+                for(l = 0; l < M; l++) {
+                    distance += grid[k][l] * abs(i - k);
+                    distance += grid[k][l] * abs(j - l);
+                }
+            }
+            if(min > distance) {
+                min = distance;
+                a = i;
+                b = j;
+            }
+
+        }
+    }
+    printf("%d %d\n",a ,b);
+}
