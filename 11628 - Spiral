@@ -1,0 +1,40 @@
+#include <stdio.h>
+char map[5000][5000] = {0};
+int main()
+{
+    int dir[4][2] = {{0, 1},{1, 0},{0, -1},{-1, 0}};
+ 	int N, Ne, T, r, c, i = 0, j, k, idx;
+ 	scanf("%d",&T);
+ 	while(i < T) {
+        scanf("%d",&N);
+        Ne = N;
+        r = 0;
+        c = -1;
+        idx = 0;
+        while(Ne > 0) {
+            j = 0;
+            while(j < Ne) {
+                r = r + dir[idx][0];
+                c = c + dir[idx][1];
+                map[r][c] = '#';
+                j++;
+            }
+            idx = (idx+1) % 4;
+            Ne--;
+        }
+
+        for(j = 0; j < N; j++) {
+            for(k = 0; k < N; k++) {
+                if(map[j][k] != '#') {
+                    map[j][k] = ' ';
+                    printf("%c",map[j][k]);
+                } else {
+                    printf("%c",map[j][k]);
+                    map[j][k] = ' ';
+                }
+            }
+            printf("\n");
+        }
+        i++;
+ 	}
+}
