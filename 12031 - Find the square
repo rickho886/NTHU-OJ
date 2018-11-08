@@ -1,0 +1,28 @@
+#include <stdio.h>
+int main()
+{
+    int i, j, k, l, N, M, X;
+    int flag;
+    int grid[120][120];
+    scanf("%d%d%d", &N, &M, &X);
+    for(i = 0; i < N; i++) {
+        for(j = 0; j < M; j++) {
+            scanf("%d",&grid[i][j]);
+        }
+    }
+    for(i = 0; i < N-X+1; i++) {
+        for(j = 0; j < M-X+1; j++) {
+            flag = 0;   
+            for(k = i; k < X+i; k++) {
+                for(l = j; l < X+j; l++) {
+                    if(grid[k][l] == 0) flag++;
+                }
+            }
+            if(flag == X*X) {
+                printf("YES\n");
+                return 0;
+            }
+        }
+    }
+    printf("NO\n");
+}
