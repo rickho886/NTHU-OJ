@@ -1,0 +1,21 @@
+#include <stdio.h>
+long long sum[1000000] = {0};
+long long sum1[1000000] = {0};
+int N[1000000] = {0};
+int main()
+{
+    int i, prob, e, le , re;
+    scanf("%d", &prob);
+    for(i = 1; i <= prob; i++) {
+        scanf("%d", &N[i]);
+        sum[i] = sum[i-1] + N[i];
+    }
+    scanf("%d", &e);
+    for(i = 1; i <= e; i++) {
+        scanf("%d%d", &le, &re);
+        sum1[i] = sum[re] - sum[le-1];
+    }
+    for(i = 1; i <= e; i++) {
+        printf("%llu\n", sum1[i]);
+    }
+}
