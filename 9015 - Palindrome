@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+    int i = 0, j, deter;
+    char string[100000];
+    while(scanf("%s",&string) != EOF) {
+        deter = 1;
+        for(j = 0; j < strlen(string)/2; j++) {
+            if(string[j] != string[strlen(string)-j-1]) {
+                deter = 0;
+                break;
+            }
+        }
+        if(deter == 0) printf("No\n");
+        else if(deter == 1) printf("Yes\n");
+    }
+
+}
