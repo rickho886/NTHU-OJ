@@ -1,0 +1,16 @@
+#include <stdio.h>
+int main()
+{
+    int i = 1,a,n,d,remainder,total;
+    scanf("%d %d %d", &a, &n, &d);
+    if ((( (-1000) < a )&&( a < 1000 )) && ( n > 0 && n < 1000 ) && ( ((-1000) < d) && (d < 1000))) {
+        total = a;
+        remainder = a;
+        while(i < n) {
+            remainder += d;
+            total += remainder;
+            ++i;
+        }
+        printf("%d %d",remainder, total);
+    }
+}
