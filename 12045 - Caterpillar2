@@ -1,0 +1,18 @@
+#include <stdio.h>
+int Li[100000];
+int main()
+{
+    int i, j;
+    int L;
+    scanf("%d",&L);
+    for(i = 0; i < L; i++) {
+        scanf("%d",&Li[i]);
+    }
+    printf("..╚⊙ ⊙╝..\n");
+    for(i = 0; i < L; i++) {
+        for(j = 0; j < Li[i]; j++) {
+            printf(".");
+        }
+        printf("╚═(███)═╝\n");
+    }
+}
