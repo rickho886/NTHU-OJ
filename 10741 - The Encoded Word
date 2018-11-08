@@ -1,0 +1,40 @@
+#include <stdio.h>
+int main()
+{
+    int a,b,c,N;
+    char d,e,f;
+    scanf("%d",&N);
+    a = N % 10;
+    N = N / 10;
+    b = N % 10;
+    N = N / 10;
+    c = N % 10;
+    if (a == 0) {
+        return 0;
+    }
+    if (b == 0) {
+        return 0;
+    }
+    if (c == 0) {
+        return 0;
+    }
+    if (c%2 == 0) {
+        d = 'A';
+    } else {
+        d = 'B';
+    }
+
+    if (b%2 == 0) {
+        e = 'C';
+    } else {
+        e = 'D';
+    }
+
+    if (a%2 == 0) {
+        f = 'E';
+    } else {
+        f = 'F';
+    }
+    printf("%c%c%c",d,e,f);
+    return 0;
+}
