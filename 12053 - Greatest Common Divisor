@@ -1,0 +1,21 @@
+#include <stdio.h>
+int gcd(long long a, long long b);
+int main()
+{
+    int j = 0, i;
+    long long T;
+    long long arr[100000];
+    scanf("%lld", &T);
+    for(i = 0; i < T; i++) scanf("%lld", &arr[i]);
+    for(i = 0; i < T; i++) {
+        arr[i+1] = gcd(arr[i], arr[i+1]);
+        j++;
+    }
+    printf("%lld\n", arr[j]);
+    return 0;
+}
+
+int gcd(long long a, long long b) {
+    if(b == 0) return a;
+    else return gcd(b, a % b);
+}
