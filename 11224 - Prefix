@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<ctype.h>
+#include<math.h>
+int count=0;
+double ans;
+char c;
+double prefix();
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        prefix();
+        if(ans==round(ans))
+            printf("= %.0lf\n",ans);
+        else
+            printf("= %.1lf\n",ans);
+    }
+}
+double prefix()
+{
+    double op1,op2;
+    while (isspace(c=getchar()))
+    {
+        continue;
+    }
+    if(c=='+')
+    {
+        printf("( ");
+        op1=prefix();
+        printf("+ ");
+        op2=prefix();
+        printf(") ");
+        ans=op1+op2;
+    }
+    else if(c=='-')
+    {
+        printf("( ");
+        op1=prefix();
+        printf("- ");
+        op2=prefix();
+        printf(") ");
+        ans=op1-op2;
+    }
+    else if(c=='*')
+    {
+        printf("( ");
+        op1=prefix();
+        printf("* ");
+        op2=prefix();
+        printf(") ");
+        ans=op1*op2;
+    }
+    else if(c=='/')
+    {
+        printf("( ");
+        op1=prefix();
+        printf("/ ");
+        op2=prefix();
+        printf(") ");
+        ans=op1/op2;
+    }
+    else if(isdigit(c))
+    {
+        printf("%c ",c);
+        ungetc(c,stdin);
+        scanf("%lf",&ans);
+    }
+    return ans;
+}
