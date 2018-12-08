@@ -1,0 +1,47 @@
+#include <stdio.h>
+int student[22];
+int T[22];
+int N;
+
+int function(int k) {
+    int method = 0;
+    if(k == N) {
+        return 1;
+    }
+    for(int i = 1; i <= N; i++) {
+        if(student[i] == 0) {
+            if(i <= T[k]) {
+                student[i] = 1;
+                method += function(k+1);
+                student[i] = 0;
+            }
+            else {
+                break;
+            }
+        }
+    }
+    return method;
+}
+
+void sorting_T()
+{
+    for(int i=0;i<N;++i)
+        for(int j=i;j<N;++j)
+            if( T[i]>T[j] )
+            {
+                int t = T[i];
+                T[i] = T[j];
+                T[j] = t;
+            }
+}
+
+int main()
+{
+    scanf("%d", &N);
+    for(int i = 0; i < N; i++) {
+        scanf("%d", &T[i]);
+    }
+    sorting_T();
+    printf("%d\n",function(0));
+    return 0;
+}
