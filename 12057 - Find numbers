@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <ctype.h>
+int main()
+{
+    char c;
+    long long int real = 0, temp = 0, ans = 0;
+    while (scanf("%c", &c) != EOF) {
+        if(isdigit(c)) {
+            temp = c - '0';
+            ans = ans*10 + temp;
+        }
+        else {
+            real += ans;
+            ans = 0;
+        }
+    }
+    printf("%lld\n", real);
+}
