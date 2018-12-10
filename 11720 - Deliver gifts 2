@@ -1,0 +1,34 @@
+#include <stdio.h>
+int N;
+int arr[20];
+int student[21] = {0};
+int main()
+{
+    scanf("%d", &N);
+    int i;
+    for(i = 0; i < N; i++) {
+        scanf("%d", &arr[i]);
+    }
+    printf("%d\n", deliver(0));
+}
+
+int deliver(int k)
+{
+    int i;
+    int method = 0;
+    if(k == N) {
+        return 1;
+    }
+    else {
+        for(i = 1; i <= N; i++) {
+            if(student[i] == 0) {
+                if(i <= arr[k]) {
+                    student[i] = 1;
+                    method += deliver(k+1);
+                    student[i] = 0;
+                }
+            }
+        }
+    }
+    return method;
+}
