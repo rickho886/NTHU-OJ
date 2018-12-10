@@ -1,0 +1,24 @@
+#include <stdio.h>
+long long arr[10000];
+int main()
+{
+	long long i, N;
+	while(scanf("%lld", &N) == 1) {
+		for(i = 0; i < N; i++) {
+			scanf("%lld", &arr[i]);
+			if(i > 0) {
+                arr[i] = lcd(arr[i], arr[i-1]);
+			}
+		}
+		printf("%lld\n", arr[i-1]);
+	}
+}
+
+int gcd(long long a, long long b) {
+	if(b == 0) return a;
+	else return gcd(b, a % b);
+}
+
+int lcd(long long a, long long b) {
+    return a*b/gcd(a, b);
+}
