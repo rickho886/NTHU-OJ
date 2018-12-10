@@ -1,0 +1,50 @@
+#include <stdio.h>
+int letter[26];
+int isUsed[11] = {0};
+int count = 0;
+int length;
+char solution[11];
+char str[11];
+int main()
+{
+    scanf("%s", str);
+    sort();
+    permutation(0);
+}
+
+int sort()
+{
+    int i, j;
+    for(i = 0; str[i] != '\0'; i++) {
+        letter[str[i]-'a']++;
+    }
+
+    for(i = 0; i < 26; i++) {
+        for(j = 0; j < letter[i]; j++) {
+            str[count++] = 'a' + i;
+        }
+    }
+    length = count;
+}
+
+int permutation(int k)
+{
+    char head = '0';
+    int i;
+    if(k == length) {
+        solution[length] = '\0';
+        printf("%s\n", solution);
+        return 0;
+    }
+    else {
+        for(i = 0; i < length; i++) {
+            if(!isUsed[i] && str[i] != head) {
+                isUsed[i] = 1;
+                head = str[i];
+                solution[k] = str[i];
+                permutation(k+1);
+                isUsed[i] = 0;
+            }
+        }
+    }
+}
