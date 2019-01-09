@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    int N, K;
+    double pangkat;
+    scanf("%d", &N);
+    if(N == 0) {
+        return 0;
+    }
+    for(K = 1; K != EOF; K++) {
+        if(K == 1 && N % 2 != 0) {
+            K--;
+            break;
+        }
+        if(N % 2 != 0) {
+            K--;
+            break;
+        }
+        N /= 2;
+    }
+    pangkat = pow(2, K);
+    printf("%.0f\n", pangkat);
+}
+
