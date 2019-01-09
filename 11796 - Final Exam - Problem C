@@ -1,0 +1,43 @@
+//only got 2/3 overall score
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "function.h"
+Node *reverseLink(Node *head);
+Node* createReversedList()
+{
+    Node *head = NULL;
+    int data;
+    for(int i = 0; i != EOF; i++) {
+        scanf("%d", &data);
+        if(data == -1) {
+            break;
+        }
+        Node *temp = (Node*)malloc(sizeof(Node));
+        temp->data = data;
+        temp->next = NULL;
+
+        if(head == NULL) {
+            head = temp;
+        }
+        else {
+            Node *r = head;
+            while(r->next != NULL) {
+                r = r->next;
+            }
+            r->next = temp;
+        }
+    }
+    Node *scan, *temp,*new_head = NULL;
+            while(head != NULL) {
+                scan = head;
+                temp = (Node*)malloc(sizeof(Node));
+                temp->data = scan->data;
+                temp->next = new_head;
+                new_head = temp;
+
+                head = scan->next;
+                free(scan);
+            }
+            return new_head;
+}
