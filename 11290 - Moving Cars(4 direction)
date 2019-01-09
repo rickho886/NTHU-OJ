@@ -1,0 +1,67 @@
+#include "function.h"
+void list_moves(int num_cars)
+{
+    for(int i = 0; i < num_cars; i++) {
+        printf("%d %d %d %d\n", right(i), down(i), left(i), up(i));
+    }
+}
+
+int right(int num_cars)
+{
+    int i, j, tmp;
+    int r = 50;
+    for(i = cars[num_cars][0]; i <= cars[num_cars][2]; i++) {
+        tmp = 0;
+        for(j = cars[num_cars][3]+1; j < 9; j++) {
+            if(map[i][j] == '.') tmp++;
+            else break;
+        }
+        if(r > tmp) r = tmp;
+    }
+    return r;
+}
+
+int down(int num_cars)
+{
+    int i, j, tmp;
+    int d = 50;
+    for(i = cars[num_cars][1]; i <= cars[num_cars][3]; i++) {
+        tmp = 0;
+        for(j = cars[num_cars][2]+1; j < 9; j++) {
+            if(map[j][i] == '.') tmp++;
+            else break;
+        }
+        if(d > tmp) d = tmp;
+    }
+    return d;
+}
+
+int left(int num_cars)
+{
+    int i, j, tmp;
+    int l = 50;
+    for(i = cars[num_cars][0]; i <= cars[num_cars][2]; i++) {
+        tmp = 0;
+        for(j = cars[num_cars][1]-1; j >= 0; j--) {
+            if(map[i][j] == '.') tmp++;
+            else break;
+        }
+        if(l > tmp) l = tmp;
+    }
+    return l;
+}
+
+int up(int num_cars)
+{
+    int i, j, tmp;
+    int u = 50;
+    for(i = cars[num_cars][1]; i <= cars[num_cars][3]; i++) {
+        tmp = 0;
+        for(j = cars[num_cars][0]-1; j >= 0; j--) {
+            if(map[j][i] == '.') tmp++;
+            else break;
+        }
+        if(u > tmp) u = tmp;
+    }
+    return u;
+}
