@@ -1,0 +1,61 @@
+#include <stdio.h>
+int main()
+{
+    int H, W;
+    int x, y;
+    int direction = 1, k;
+    scanf("%d%d", &H, &W);
+    scanf("%d%d", &y, &x);
+    scanf("%d", &k);
+    for(int count = 0; count < k-1; count++) {
+        if(direction == 1) {
+            while(1) {
+                y--, x++;
+                if(y == 1) {
+                    direction = 2;
+                    break;
+                } else if(x == W) {
+                    direction = 4;
+                    break;
+                }
+            }
+        } else if(direction == 2) {
+            while(1) {
+                y++, x++;
+                if(y == H) {
+                    direction = 1;
+                    break;
+                } else if(x == W) {
+                    direction = 3;
+                    break;
+                }
+            }
+        } else if(direction == 3) {
+            while(1) {
+                y++, x--;
+                if(y == H) {
+                    direction = 4;
+                    break;
+                } else if(x == 1) {
+                    direction = 2;
+                    break;
+                }
+            }
+        } else if(direction == 4) {
+            while(1) {
+                y--, x--;
+                if(y == 1) {
+                    direction = 3;
+                    break;
+                } else if(x == 1) {
+                    direction = 1;
+                    break;
+                }
+            }
+        }
+        if(x == 1 && y == 1 || x == W && y == 1 || x == W && y == H || x == 1 && y == H) {
+            break;
+        }
+    }
+    printf("(%d,%d)", y, x);
+}
