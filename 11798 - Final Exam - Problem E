@@ -1,0 +1,66 @@
+//only got 4/5 for overall score
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#define MAX_SIZE 600
+char content[MAX_SIZE];
+char input[MAX_SIZE];
+int mode = 0;
+int ccursor = 0;
+int main()
+{
+    fgets(input, MAX_SIZE, stdin);
+    char temp[MAX_SIZE];
+    int cursor = 0;
+    for(int i = 0; i < MAX_SIZE; i++) {
+        if(input[i] == '/') {
+            if(input[i+1] == 'I') {
+                if(mode == 0) mode = 1;
+                else if(mode == 1) mode = 0;
+                i+=1;
+            } else if(input[i+1] == 'B') {
+                strcpy(temp, &content[cursor]);
+                if(cursor != 0) {
+                    cursor--;
+                    ccursor--;
+                }
+                strcpy(&content[cursor], temp);
+                i+=1;
+            } else if(input[i+1] == 'L') {
+                cursor--;
+                if(cursor < 0) cursor = 0;
+                i+=1;
+            } else if(input[i+1] == 'R') {
+                cursor++;
+                if(cursor > ccursor) cursor = ccursor;
+                i+=1;
+            } else if(input[i+1] == 'n') {
+                strcpy(temp, &content[cursor]);
+                strcpy(&content[cursor+1], temp);
+                content[cursor++] = '\n';
+                ccursor++;
+                i+=1;
+            }
+        }
+        else if(isalpha(input[i]) || input[i] == ' ' || isdigit(input[i])){
+            if(mode == 0) {
+                strcpy(temp, &content[cursor]);
+                strcpy(&content[cursor+1], temp);
+                content[cursor++] = input[i];
+                ccursor++;
+            } else if(mode == 1) {
+                if(content[cursor] == '\n') {
+                    strcpy(temp, content[cursor]);
+                    strcpy(content[cursor+1], temp);
+                    content[cursor++] = input[i];
+                    ccursor++;
+                } else {
+                    content[cursor++] = input[i];
+
+                }
+            }
+        }
+    }
+    printf("%s", content);
+}
