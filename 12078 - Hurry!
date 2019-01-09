@@ -1,0 +1,60 @@
+#include <stdio.h>
+int main()
+{
+    int person[3000];
+    int c[3000];
+    int d[3000];
+    int T, N, K;
+    int i, j, k;
+    int hitung, kandidat = 0;
+    scanf("%d", &T);
+    for(i = 0; i < T; i++) {
+        scanf("%d%d", &N, &K);
+        person[0] = 1;
+        person[N+1] = 1;
+        for(int a = 1; a <= K ; a++) {
+            // count the urinal
+            for(j = 1; j <= N; j++) {
+                if(person[j] == 1) continue;
+                // count to left
+                hitung = 0;
+                for(k = j-1; k >= 0; k--) {
+                    if(person[k] == 1) {
+                        c[j] = hitung;
+                        break;
+                    } else {
+                        hitung++;
+                    }
+                }
+                // count to right
+                hitung = 0;
+                for(k = j+1; k <= N+1; k++) {
+                    if(person[k] == 1) {
+                        d[j] = hitung;
+                        break;
+                    } else {
+                        hitung++;
+                    }
+                }
+                if(c[j] > d[j]) c[j] = d[j];
+                // cari max
+            }
+            hitung = -1;
+            for(k = 1; k < N+1; k++) {
+                if(person[k] == 1) continue;
+                if(c[k] > hitung) {
+                    hitung = c[k];
+                    kandidat = k;
+                }
+            }
+            person[kandidat] = 1;
+        }
+        printf("%d\n", kandidat);
+        for(k = 1; k <= N+1; k++) {
+            person[k] = 0;
+            c[k] = 0;
+            d[k] = 0;
+        }
+    }
+
+}
