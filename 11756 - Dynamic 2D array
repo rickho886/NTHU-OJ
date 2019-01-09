@@ -1,0 +1,15 @@
+unsigned** new_2d_array(unsigned n,unsigned m)
+{
+    int i;
+    unsigned** arrn = (unsigned**)malloc(n*sizeof(unsigned*));
+    unsigned* arrm = (unsigned*)malloc(n*m*sizeof(unsigned));
+    for(i = 0; i < n; i++) {
+        arrn[i] = i*m + arrm;
+    }
+    return arrn;
+}
+void delete_2d_array(unsigned **arr)
+{
+    free(arr[0]);
+    free(arr);
+}
