@@ -1,0 +1,52 @@
+#include "function.h"
+Node* Create_List(Node* head, int data)
+{
+    Node *temp = (Node*)malloc(sizeof(Node));
+    temp->data = data;
+    temp->next = NULL;
+    if(head == NULL) {
+        head = temp;
+    } else {
+        Node *r = head;
+        while(r->next != NULL) {
+            r = r->next;
+        }
+        r->next = temp;
+    }
+    return head;
+}
+Node* Reverse_List(Node* head)
+{
+    Node *temp, *scan, *new_head = NULL;
+    while(head != NULL) {
+        scan = head;
+        temp = (Node*)malloc(sizeof(Node));
+        temp->data = scan->data;
+        temp->next = new_head;
+        new_head = temp;
+
+        head = scan->next;
+        free(scan);
+    }
+    return new_head;
+}
+void Print_List(Node* head)
+{
+    Node *tmp = head;
+    while(tmp != NULL) {
+        if(tmp->next != NULL)
+           printf("%d->", tmp->data);
+        else
+            printf("%d\n", tmp->data);
+        tmp = tmp->next;
+    }
+}
+void Free_List(Node* head)
+{
+    Node *tmp;
+    while(head != NULL) {
+        tmp = head;
+        head = head->next;
+        free(tmp);
+    }
+}
