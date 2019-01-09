@@ -1,0 +1,20 @@
+#include "function.h"
+void flooding(int R, int C, int pr, int pc)
+{
+    if(Map[pr][pc] == 'H') {
+        Map[pr][pc] = 'W';
+    }
+    if(Map[pr+1][pc] == 'H') {
+        flooding(R, C, pr+1, pc);
+    }
+    if(Map[pr-1][pc] == 'H') {
+        flooding(R, C, pr-1, pc);
+    }
+    if(Map[pr][pc+1] == 'H') {
+        flooding(R, C, pr, pc+1);
+    }
+    if(Map[pr][pc-1] == 'H') {
+        flooding(R, C, pr, pc-1);
+    }
+
+}
