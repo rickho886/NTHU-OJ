@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int map[30][30] = {0};
+int main()
+{
+    int i, j;
+    int direction[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};
+    int NX, NY;
+    int P;
+    scanf("%d%d%d",&NY, &NX, &P);
+    int Nex = NX;
+    int Ney = NY;
+    int x = 0, y = -1;
+    int idx = 0, sum = 1;
+    while(Ney > 0) {
+        int Ne;
+        if(direction[idx][0] != 0) {
+            Ne = Ney;
+        } else if(direction[idx][1] != 0) {
+            Ne = Nex;
+        }
+        for(i = 0; i < Ne; i++) {
+            x = x + direction[idx][0];
+            y = y + direction[idx][1];
+            map[x][y] = sum;
+            sum++;
+        }
+        idx = (idx+1)%4;
+        if (idx == 1 || idx == 3) {
+            Ney--;
+            Nex--;
+        }
+    }
+
+    for(i = 0; i < NY; i++) {
+        for(j = 0; j < NX; j++) {
+            if(map[i][j] == P) {
+                y = i+1;
+                x = j+1;
+                break;
+            }
+        }
+        if(map[i][j] == P) {
+            break;
+        }
+    }
+    printf("%d %d\n", y, x);
+}
