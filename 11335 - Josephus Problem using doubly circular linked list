@@ -152,3 +152,73 @@ void freeList()
         free(temp2);
     }
 }
+
+
+// version 3
+
+#include "function.h"
+#include <stdlib.h>
+Node* first;
+Node* temp;
+int total;
+
+Node* createList(int n)
+{
+    int i;
+    total = n;
+    head = (Node*)malloc(sizeof(Node));
+    head->next = (Node*)malloc(sizeof(Node));
+    head->prev = (Node*)malloc(sizeof(Node));
+    head->number = 1;
+    first = head;
+    temp = head;
+    head = head->next;
+    for(i = 2; i < n; i++) {
+        head->next = (Node*)malloc(sizeof(Node));
+        head->prev = (Node*)malloc(sizeof(Node));
+        head->number = i;
+        head->prev = temp;
+        temp = head;
+        head = head->next;
+    }
+    head->number = i;
+    head->prev = temp;
+    head->next = first;
+    temp = first;
+    first->prev = head;
+    return head;
+}
+
+int solveJosephus(int step)
+{
+    int i = 1;
+    int flag = 0;
+    int direction = 0;
+    while(first->number != first->next->number) {
+        if(i == step) {
+            first->next->prev = first->prev;
+            first->prev->next = first->next;
+            direction = flag < 1 ? 1:0;
+            flag = direction;
+            i = 0;
+            continue;
+        }
+        if(direction == 0) {
+            first = first->next;
+        } else if(direction == 1) {
+            first = first->prev;
+        }
+        i++;
+    }
+    return first->number;
+}
+
+void freeList()
+{
+    Node *temp2;
+    for(int i = 0; i < total; i++) {
+        temp2 = temp;
+        temp = temp->next;
+        free(temp2);
+    }
+}
