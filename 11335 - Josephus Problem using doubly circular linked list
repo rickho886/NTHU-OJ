@@ -1,3 +1,68 @@
+// passed code
+
+#include "function.h"
+#include <stdlib.h>
+int total;
+Node* last;
+Node* new_node;
+
+Node* createList(int n)
+{
+    int i = 1;
+    total = n;
+    head = NULL;
+    while(i <= n) {
+        if(head == NULL) {
+            new_node = (Node*)malloc(sizeof(Node));
+            new_node->number =  i;
+            new_node->next = new_node->prev = new_node;
+            head = new_node;
+            i++;
+            continue;
+        }
+        last = head->prev;
+        new_node = (Node*)malloc(sizeof(Node));
+        new_node->number = i;
+        new_node->next = head;
+        head->prev = new_node;
+        new_node->prev = last;
+        last->next = new_node;
+        i++;
+    }
+    new_node = new_node->next;
+}
+
+int solveJosephus(int step)
+{
+    int i = 1;
+    int flag = 0;
+    int direction = 0;
+    while(new_node->number != new_node->next->number) {
+        if(i == step) {
+            new_node->next->prev = new_node->prev;
+            new_node->prev->next = new_node->next;
+            direction = flag < 1 ? 1:0;
+            flag = direction;
+            i = 0;
+            continue;
+        }
+        if(direction == 0) {
+            new_node = new_node->next;
+        } else if(direction == 1) {
+            new_node = new_node->prev;
+        }
+        i++;
+    }
+    return new_node->number;
+}
+
+void freeList()
+{
+}
+
+______________________________________________________________________________________________________________________________________________
+
+
 // still gagal
 
 // version 1
