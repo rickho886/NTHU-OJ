@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct _Node {
+    int number;
+    struct _Node* next;
+    struct _Node* prev;
+}Node;
+
+int main()
+{
+    int i, j;
+    int n, m;
+    int aidx, bidx, idx;
+    char command[4];
+    Node* first = NULL;
+    Node* last;
+    Node* new_node;
+    scanf("%d%d", &n, &m);
+    for(i = 0; i < n; i++) {
+        if(first == NULL) {
+            new_node = (Node*)malloc(sizeof(Node));
+            scanf("%d", &new_node->number);
+            new_node->next = new_node->prev = new_node;
+            first = new_node;
+            continue;
+        }
+        last = first->prev;
+        new_node = (Node*)malloc(sizeof(Node));
+        scanf("%d", &new_node->number);
+        new_node->next = first;
+        first->prev = new_node;
+        new_node->prev = last;
+        last->next = new_node;
+    }
+    last = new_node;
+    new_node = new_node->next;
+    for(i = 0; i < m; i++) {
+        scanf("%s", command);
+        Node* temp = first;
+        if(strcmp(command, "ADD") == 0) {
+            new_node = (Node*)malloc(sizeof(Node));
+            scanf("%d%d", &idx, &new_node->number);
+            for(j = 0; j < idx; j++) {
+                temp = temp->next;
+            }
+            new_node->next = temp;
+            temp->prev->next = new_node;
+            new_node->prev = temp->prev;
+            temp->prev = new_node;
+            if(idx == 0) first = new_node;
+            if(idx == n) last = new_node;
+            n++;
+
+        } else if(strcmp(command, "CUT") == 0) {
+            Node* a;
+            Node* b;
+            scanf("%d%d", &aidx, &bidx);
+            if(aidx == 0) continue;
+            for(j = 0; j < aidx+bidx; j++) {
+                if(j == aidx) a = temp;
+                temp = temp->next;
+            }
+            b = temp->prev;
+            a->prev->next = b->next;
+            b->next->prev = a->prev;
+            a->prev = last;
+            last->next = a;
+            first->prev = b;
+            b->next = first;
+            first = a;
+
+        }
+    }
+    for(i = 0; i < n; i++) {
+        printf("%d\n", first->number);
+        first = first->next;
+    }
+}
