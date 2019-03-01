@@ -34,8 +34,7 @@ int main()
         temp->next = new_node;
         temp = temp->next;
     }
-    k = 0;
-    while(k != EOF) {
+    while(1) {
         scanf("%s", com1);
         if(strcmp(com1, "exit") == 0) {
             temp = first;
@@ -196,6 +195,5 @@ int main()
                 temp2->value[j] = -1;
             }
         }
-        k++;
     }
 }
