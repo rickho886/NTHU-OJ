@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+char prefix[100001];
+int idx = 0, n;
+int calculate(int a, int b, int c, int d);
+int main()
+{
+  scanf("%s", prefix);
+  n = strlen(prefix);
+  int i;
+  for(i = 0; i < 16; i++) {
+    printf("%d %d %d %d %d\n", (i&8)>>3, (i&4)>>2, (i&2)>>1, i&1, calculate((i&8)>>3, (i&4)>>2, (i&2)>>1, i&1));
+    idx = 0;
+  }
+}
+
+int calculate(int a, int b, int c, int d)
+{
+  if(idx<n) {
+    char cprefix = prefix[idx];
+    idx++;
+    int ans, op1, op2;
+    if(cprefix == '&') {
+      op1 = calculate(a, b, c, d);
+      op2 = calculate(a, b, c, d);
+      ans = op1 & op2;
+    } else if(cprefix == '|') {
+      op1 = calculate(a, b, c, d);
+      op2 = calculate(a, b, c, d);
+      ans = op1 | op2;
+    } else if(cprefix == 'A') ans = a;
+    else if(cprefix == 'B') ans = b;
+    else if(cprefix == 'C') ans = c;
+    else if(cprefix == 'D') ans = d;
+    return ans;
+  }
+}
