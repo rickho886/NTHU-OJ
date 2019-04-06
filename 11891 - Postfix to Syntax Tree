@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "function.h"
+
+void constructTree(Node** head)
+{
+    if((*head)==NULL)
+    {
+        (*head) = (Node *)malloc(sizeof(Node));
+        if((strlen(s1)-1-idx) < 0)
+            return NULL;
+            
+		    (*head)->data = s2[idx++];
+        (*head)->left = (*head)->right = NULL;
+        
+        if((*head)->right == NULL && ((*head)->data=='&' || (*head)->data=='|'))
+            constructTree( &(*head)->right);
+        if((*head)->left == NULL && ((*head)->data=='&' || (*head)->data=='|'))
+            constructTree( &(*head)->left);
+    }
+}
