@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+	/* op: & \ or \ ID */
+	int val, op;
+	/* left child \ right child \ parent node */
+	struct Node *lch, *rch, *fa;
+} Node;
+
+#define maxn 200010
+
+/* All Variables' Nodes */
+Node *node[maxn];
+/* Prefix Expression */
+char s[maxn * 5];
+/* The index on expression */
+int idx;
+
+/* Build New Node */
+Node *newNode(int ch, Node *fa) {
+	Node *temp = (Node *)malloc(sizeof(Node));
+	/* Stored negative values of '&', '|' of ASCII codes */
+	/* Stored 0 if the node is a variables */
+	temp->op = ch;
+	/* All values are 0 at first */
+	temp->val = 0;
+	/* The parent node */
+	temp->fa = fa;
+	temp->lch = temp->rch = NULL;
+	return temp;
+}
+
+/* You need to pass the Parent Node to build tree */
+Node *build(Node *fa) {
+	if (s[idx] == '|' || s[idx] == '&') {
+		Node *op = newNode(-s[idx], fa);
+		idx++;
+		op->lch = build(op);
+		op->rch = build(op);
+		return op;
+	}
+	/* else if s[idx] == '[ID]' */
+	/* skip '[' & caculate ID & skip ']' */
+	idx++;
+	int sum = 0;
+	while (s[idx] >= '0' && s[idx] <= '9') {
+		sum = sum * 10 + s[idx] - '0';
+		idx++;
+	}
+	idx++;
+	node[sum] = newNode(0, fa);
+	return node[sum];
+}
+
+int main() {
+	int test;
+	scanf("%d", &test);
+	while (test--) {
+		int n, m;
+		scanf("%d%d%s", &n, &m, s);
+		idx = 0;
+		/* The parent of first Node is NULL */
+		Node *root = build(NULL);
+		for (int i = 0; i < m; i++) {
+			int x;
+			scanf("%d", &x);
+			Node *cur = node[x];
+			/* cur->val 0 to 1, 1 to 0 */
+			cur->val ^= 1;
+			/* Update All node's parent on this chain */
+			while (cur != root) {
+				Node *fa = cur->fa;
+				if (fa->op * -1 == '&')
+					fa->val = fa->lch->val & fa->rch->val;
+				else
+					fa->val = fa->lch->val | fa->rch->val;
+				cur = fa;
+			}
+			printf("%d\n", root->val);
+		}
+	}
+	return 0;
+}
