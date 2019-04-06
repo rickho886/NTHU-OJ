@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "function.h"
+int sum = 0;
+int start = 1;
+int count = 0;
+int rcount = 0;
+int max = 0;
+
+Node *create_node(int data) {
+    Node *tmp = (Node*) malloc(sizeof(Node));
+    tmp->data = data;
+    tmp->left = tmp->right = NULL;
+    return tmp;
+}
+
+int idxSearch(int arr[], int strt, int end, int value)
+{
+    int i;
+    for (i = strt; i <= end; i++)
+    {
+        if (arr[i] == value)
+            return i;
+    }
+}
+
+Node* buildTree(int* inorder, int* preorder, int inorder_start, int inorder_end)
+{
+    static int preorder_idx = 0;
+    if(start == 1) {
+        max = inorder_end+1;
+        start = 0;
+    }
+    if(inorder_start > inorder_end)
+        return NULL;
+    Node* treeNode = create_node(preorder[preorder_idx++]);
+    if(inorder_start == inorder_end) {
+        return treeNode;
+    }
+    int inorder_idx = idxSearch(inorder, inorder_start, inorder_end, treeNode->data);
+    treeNode->left = buildTree(inorder, preorder, inorder_start, inorder_idx-1);
+    treeNode->right = buildTree(inorder, preorder, inorder_idx+1, inorder_end);
+    return treeNode;
+}
+void caculateLeafNodesSum(Node* root)
+{
+    if(root == NULL)
+        return NULL;
+    count++;
+    caculateLeafNodesSum(root->left);
+    caculateLeafNodesSum(root->right);
+    if(root->left == NULL && root->right == NULL)
+        sum += root->data;
+    if(count == max) {
+        rcount++;
+        if(rcount == 3)
+            printf("%d\n", sum);
+    }
+}
