@@ -17,9 +17,6 @@ Node* makeNode(char);
 Node* deleteAndUpdate(Node *root, int index, int deleteHead, int deleteTail);
 long long int recalculate(Node*);
 
-void showTree(Node*);
-char choose(Node*);
-
 int main()
 {
 	int N;
@@ -76,9 +73,8 @@ Node* makeNode(char c)
 	else if (c == '*') res->type = MUL;
 
 	if (res->type == NUM) res->val = c - '0';
-	res->right = NULL;
-	res->left = NULL;
-
+	res->right = res->left = NULL;
+	
 	return res;
 }
 
