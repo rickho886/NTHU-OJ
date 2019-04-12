@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "function.h"
+Node* EXPR()
+{
+    char c;
+    Node *node = NULL, *right=NULL;
+    if (pos>=0) {
+        right = TERM();
+        if (pos>0) {
+            c = input[pos];
+            if (c == '+' || c == '-') {
+                node = makeNode(c, -1);
+                node->right = right;
+                pos--;
+                node->left = EXPR();
+            } else {
+                node = right;
+            }
+        } else {
+            node = right;
+        }
+    }
+    return node;
+}
+
+Node* TERM()
+{
+    char c;
+    Node *node = NULL, *right = NULL;
+    if (pos>=0) {
+        right = FACTOR();
+        if (pos > 0) {
+            c = input[pos];
+            if(c == '*') {
+                node = makeNode(c, -1);
+                node->right = right;
+                pos--;
+                node->left = TERM();
+            } else {
+                node = right;
+            }
+        } else {
+            node = right;
+        }
+    }
+    return node;
+}
+
+/*
+Input pairs for makeNode():
+  ('+', -1),
+  ('-', -1),
+  ('*', -1), where, -1 means the value is not important for an operator symbol,
+  ('N', value), where 'N' means an integer is encountered.
+*/
+Node* makeNode(char c, int value)
+{
+    Node* temp = (Node*)malloc(sizeof(Node));
+    if(c == 'N') {
+        temp->type = INT;
+        temp->value = value;
+    } else if(c == '+') {
+        temp->type = OP_ADD;
+        temp->value = -1;
+    } else if(c == '-') {
+        temp->type = OP_SUB;
+        temp->value = -1;
+    } else if(c == '*') {
+        temp->type = OP_MUL;
+        temp->value = -1;
+    }
+    temp->left = temp->right = NULL;
+    return temp;
+}
+void freeTree(Node *root)
+{
+    if (root != NULL) {
+        freeTree(root->left);
+        freeTree(root->right);
+        free(root);
+    }
+}
+long long calculate(Node *root)
+{
+    if(root != NULL) {
+        long long int op1, op2, ans;
+        if(root->type == OP_MUL) {
+            op1 = calculate(root->left);
+            op2 = calculate(root->right);
+            ans = op1 * op2;
+        } else if(root->type == OP_ADD) {
+            op1 = calculate(root->left);
+            op2 = calculate(root->right);
+            ans = op1 + op2;
+        } else if(root->type == OP_SUB) {
+            op1 = calculate(root->left);
+            op2 = calculate(root->right);
+            ans = op1 - op2;
+        } else if(root->type == INT){
+            ans = root->value;
+        }
+        return ans;
+     }
+}
