@@ -1,0 +1,57 @@
+#include <iostream>
+#include "function.h"
+using namespace std;
+
+Node* last;
+Josephus::Josephus() {
+}
+Josephus::~Josephus() {
+    delete [] head;
+}
+
+Josephus::Josephus(const int &numofpeople)
+{
+    noOfPeople = numofpeople;
+    generateFib(numofpeople);
+    generatecircularlinkedList(numofpeople);
+}
+
+int Josephus::kill()
+{
+    int idx = 0;
+    Node* tmp = head;
+    while(tmp->number != tmp->next->number) {
+		int m = ((sequence[idx] % noOfPeople) == 0) ? noOfPeople : (sequence[idx] % noOfPeople) ;
+        for(int i = 0; i < m-1; i++) {
+            last = tmp;
+            tmp = tmp->next;
+        }
+        last->next = tmp->next;
+        tmp = last->next;
+		noOfPeople--;
+        idx++;
+    }
+    return tmp->number;
+}
+
+void Josephus::generatecircularlinkedList(const int &numofpeople)
+{
+    head = new Node {1};
+    Node* tmp = head, *newNode;
+    for(int i = 2; i <= numofpeople; i++) {
+        newNode = new Node{i};
+        tmp->next = newNode;
+        tmp = newNode;
+    }
+    last = tmp;
+    tmp->next = head;
+}
+
+void Josephus::generateFib(const int &numofpeople)
+{
+    sequence[0] = 1;
+    sequence[1] = 1;
+    for(int i=2; i<numofpeople; i++) {
+        sequence[i] = sequence[i-2] + sequence[i-1];
+    }
+}
