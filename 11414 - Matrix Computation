@@ -44,7 +44,7 @@ Matrix Matrix::rotatecounter90() const
 void Matrix::symmetric() const
 {
     for(int i = 0; i < matrix_size; i++) {
-        for(int j = 0; j < matrix_size; j++) {
+        for(int j = i+1; j < matrix_size; j++) {
             if(matrix[i][j] != matrix[j][i]) {
                 cout << "no" << endl;
                 return;
