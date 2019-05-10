@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string.h>
+#include "function.h"
+
+using namespace std;
+
+Str::Str(char* ch) {
+    head = new Char(*ch);
+    int i, len = strlen(ch);
+    for(i = 1, tail = head; i < len; i++, tail = tail->next) {
+        tail->next = new Char(ch[i]);
+    }
+}
+Str::Str(const Str &St) {
+    head = new Char(St.head->text);
+    Char *tmp = St.head->next;
+    for(tail = head; tmp; tail = tail->next, tmp = tmp->next) {
+        tail->next = new Char(tmp->text);
+    }
+}
+Str& Str::strInsert(const Str &St) {
+    Str* tmp = new Str(St);
+    tail->next = tmp->head;
+    tail = tmp->tail;
+    return *this;
+}
