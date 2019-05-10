@@ -1,0 +1,37 @@
+#include <iostream>
+#include "function.h"
+using namespace std;
+
+List_queue::List_queue(){
+    head = tail = NULL;
+}
+List_queue::~List_queue(){
+    delete head;
+}
+void List_queue::enqueue(const int &number)
+{
+    if(head) {
+        tail->nextPtr = new ListNode(number);
+        tail = tail->nextPtr;
+    } else {
+        head = new ListNode(number);
+        tail = head;
+    }
+}
+void List_queue::dequeue()
+{
+    if(head != tail) {
+        head = head->nextPtr;
+        delete head->prevPtr;
+    } else {
+        delete head;
+        head = tail = NULL;
+    }
+}
+void List_queue::print()
+{
+    for(ListNode* tmp = head; tmp != tail; tmp = tmp->nextPtr) {
+        cout << tmp->data << " ";
+    }
+    if(tail) cout << tail->data;
+}
