@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string.h>
+#include "function.h"
+
+using namespace std;
+
+Str::Str(char* s) {
+    head = new Char(*s);
+    int i, len = strlen(s);
+    for(i = 1, tail = head; i < len; i++, tail = tail->next) {
+        tail->next = new Char(s[i]);
+    }
+}
+Str::Str(const Str &s) {
+    head = new Char(s.head->text);
+    Char *tmp = s.head->next;
+    for(tail = head; tmp; tail = tail->next, tmp = tmp->next) {
+        tail->next = new Char(tmp->text);
+    }
+}
+bool Str::operator==( const Str &s) const {
+    for(Char *tempA = head, *tempB = s.head; tempA && tempB; tempA = tempA->next, tempB = tempB->next) {
+        if(tempA->text != tempB->text) return false;
+        if((tempA->next == NULL && tempB->next) || (tempB->next == NULL && tempA->next)) return false;
+    }
+    return true;
+}
