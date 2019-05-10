@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string.h>
+#include "function.h"
+
+using namespace std;
+
+std::ostream &operator<<(std::ostream &out, const SimpleString &ss) {
+    out << ss.ptr;
+}
+std::istream &operator>>(std::istream &in, SimpleString &ss) {
+    ss.ptr = new char[100000];
+    in >> ss.ptr;
+    return in;
+}
+
+SimpleString::SimpleString( const SimpleString &ss) {
+    ptr = new char[100000];
+    strcpy(ptr, ss.ptr);
+}
+SimpleString::~SimpleString() {
+    //delete ptr;
+    //delete size;
+}
+const SimpleString& SimpleString::operator=(const SimpleString &ss) {
+    delete [] ptr;
+    ptr = new char[100000];
+    strcpy(ptr, ss.ptr);
+}
+bool SimpleString::operator==( const SimpleString &ss) const {
+    return !strcmp(ptr, ss.ptr);
+}
+void SimpleString::reverse() {
+    SimpleString tmp;
+    tmp.ptr = new char[100000];
+    int i, len = strlen(ptr);
+    for(i = 0; i < len; i++) {
+        tmp.ptr[i] = ptr[len-i-1];
+    }
+    tmp.ptr[i] = '\0';
+    *this = tmp;
+}
