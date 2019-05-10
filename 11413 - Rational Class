@@ -1,0 +1,41 @@
+#include <iostream>
+#include "function.h"
+using namespace std;
+
+Rational::Rational(int a, int b)
+{
+    numerator = a;
+    denominator = b;
+    reduce();
+}
+
+Rational Rational::addition(const Rational& b) const
+{
+    Rational ans(numerator * b.denominator + b.numerator * denominator, denominator * b.denominator);
+    ans.reduce();
+    return ans;
+}
+
+Rational Rational::multiplication(const Rational& b) const
+{
+    Rational ans(numerator * b.numerator, denominator * b.denominator);
+    ans.reduce();
+    return ans;
+}
+
+void Rational::reduce()
+{
+    bool negative = (numerator*denominator <0);
+    if(numerator<0) numerator = -numerator;
+    if(denominator<0) denominator = -denominator;
+    int g = gcd(numerator, denominator);
+    numerator /= g;
+    denominator /= g;
+    if(negative)
+        numerator = -numerator;
+}
+
+void Rational::printRational() const
+{
+    cout << numerator << "/" << denominator << endl;
+}
