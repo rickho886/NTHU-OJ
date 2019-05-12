@@ -1,0 +1,107 @@
+#include <iostream>
+#include "function.h"
+
+using namespace std;
+
+void List::InsertHead(int data) {
+    if(head == nullptr) {
+        head = new ListNode(data);
+        head->next = nullptr;
+        head->prev = nullptr;
+        tail = head;
+        middle = head;
+    } else {
+        ListNode* new_node = new ListNode(data);
+        new_node->next = head;
+        new_node->prev = nullptr;
+        head->prev = new_node;
+        head = new_node;
+
+        if(pos) middle = middle->prev;
+        pos = !pos;
+    }
+    ++cnt;
+}
+int List::RemoveHead() {
+    int ans;
+    if(head == nullptr) {
+        throw out_of_range("Empty List");
+    }
+    else {
+        ans = head->data;
+        ListNode* tmp = head;
+        if(head == tail) {
+            reset();
+            return ans;
+        } else {
+            head->next->prev = nullptr;
+            head = head->next;
+        }
+
+        if(!pos) middle = middle->next;
+        pos = !pos;
+
+        delete tmp;
+    }
+    --cnt;
+    return ans;
+}
+void List::InsertTail(int data) {
+    if(tail == nullptr) {
+        tail = new ListNode(data);
+        tail->next = nullptr;
+        tail->prev = nullptr;
+        head = tail;
+        middle = tail;
+    } else {
+        ListNode* new_node = new ListNode(data);
+        new_node->next = nullptr;
+        new_node->prev = tail;
+        tail->next = new_node;
+        tail = new_node;
+
+        if(!pos) middle = middle->next;
+        pos = !pos;
+    }
+    ++cnt;
+}
+int List::RemoveTail() {
+    int ans;
+    if(tail == nullptr) {
+        throw out_of_range("Empty List");
+    }
+    else {
+        ans = tail->data;
+        ListNode* tmp = tail;
+        if(tail == head) {
+            reset();
+            return ans;
+        } else {
+            tail->prev->next = nullptr;
+            tail = tail->prev;
+        }
+
+        if(pos) middle = middle->prev;
+        pos = !pos;
+
+        delete tmp;
+    }
+    --cnt;
+    return ans;
+}
+void List::Swap() {
+    if(head == nullptr) return;
+    if(head == tail) return;
+    ListNode* tmp = middle->prev;
+    tail->next = head;
+    head->prev = tail;
+
+    head = middle;
+
+    if(cnt%2) middle = tail;
+    else middle = tail->next;
+
+    tail = tmp;
+    head->prev = nullptr;
+    tail->next = nullptr;
+}
