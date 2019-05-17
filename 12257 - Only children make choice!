@@ -1,0 +1,49 @@
+#include <iostream>
+#include "function.h"
+using namespace std;
+
+Animal::Animal(Zoo* ext_zoo, string ext_name) {
+    this->belong = ext_zoo;
+    this->species = ext_name;
+    if(ext_name == "Caog")
+        this->legs = 8;
+    else
+        this->legs = 4;
+}
+
+Dog::Dog(Zoo* ext_zoo) : Animal(ext_zoo, "Dog") {
+    species = "Dog";
+    if(legs != 8)
+        belong->born(species);
+}
+
+Dog::~Dog() {
+    ;
+}
+
+Cat::Cat(Zoo* ext_zoo) : Animal(ext_zoo, "Cat") {
+    species = "Cat";
+    if(legs != 8)
+        belong->born(species);
+}
+
+Cat::~Cat() {
+    ;
+}
+
+Caog::Caog(Zoo *ext_zoo): Dog(ext_zoo), Cat(ext_zoo), Animal(ext_zoo, "Caog") {
+    species = "Caog";
+    belong->born(species);
+}
+void Caog::barking() {
+    cout << "woof!woof!meow!\n";
+}
+void Caog::carton() {
+    cout << "it looks so happy!\n";
+}
+void Caog::throwBall() {
+    cout << "it looks happy!\n";
+}
+Caog::~Caog() {
+    ;
+}
