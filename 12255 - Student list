@@ -1,43 +1,37 @@
-#include <cstdio>
-#include <vector>
-#include <cassert>
+#include <iostream>
 #include <string.h>
 #include "function.h"
 using namespace std;
 
-student::student(char* ext_name, char* ext_id) {
+student::student(char *ext_name, char *ext_id) {
     int i;
-    int len_name = strlen(ext_name);
-    int len_id = strlen(ext_id);
+    int name_len = strlen(ext_name);
+    int id_len = strlen(ext_id);
     name = new char[100];
     id = new char[10];
-    for(i = 0; i < len_name; i++) {
+    for(i = 0; i < name_len; i++) {
         name[i] = ext_name[i];
     }
     name[i] = '\0';
-    for(i = 0; i < len_id; i++) {
+    for(i = 0; i < id_len; i++) {
         id[i] = ext_id[i];
     }
     id[i] = '\0';
 }
-
-student::student(const student &s) {
+student::student(const student& s) {
     *this = s;
-    //printf("%s\n", name);
-    //printf("%s\n", id);
 }
-
-student &student::operator=(const student &s) {
+student& student::operator=(const student& s) {
     int i;
-    int len_name = strlen(s.name);
-    int len_id = strlen(s.id);
+    int name_len = strlen(s.name);
+    int id_len = strlen(s.id);
     name = new char[100];
     id = new char[10];
-    for(i = 0; i < len_name; i++) {
+    for(i = 0; i < name_len; i++) {
         name[i] = s.name[i];
     }
     name[i] = '\0';
-    for(i = 0; i < len_id; i++) {
+    for(i = 0; i < id_len; i++) {
         id[i] = s.id[i];
     }
     id[i] = '\0';
